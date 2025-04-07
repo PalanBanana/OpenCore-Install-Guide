@@ -659,21 +659,13 @@ BlueToolFixup은 Lilu 이후 어디에나 있을 수 있습니다.
 * 아래에 표시된 하나 이상의 플러그인과 페어링되어야 합니다.
 
 ::: 팁 VoodooI2C 플러그인
-
 | 연결 유형 | 플러그인 | 메모 |
-
 | :--- | :--- | :--- |
-
 | 멀티터치 HID | VoodooI2CHID | I2C/USB 터치스크린 및 트랙패드와 함께 사용 가능 |
-
 | ELAN 독점 | VoodooI2CElan | ELAN1200+는 대신 VoodooI2CHID가 필요합니다 |
-
 | FTE1001 터치패드 | VoodooI2CFTE | |
-
 | Atmel 멀티터치 프로토콜 | VoodooI2CAtmelMXT | |
-
 | Synaptics HID | [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases) | I2C Synaptic 트랙패드 (I2C 모드에만 VoodooI2C 필요) |
-
 | Alps HID | [AlpsHID](https://github.com/blankmac/AlpsHID/releases) | USB 또는 I2C Alps 트랙패드와 함께 사용할 수 있습니다. 대부분 Dell 노트북과 일부 HP EliteBook 모델에서 볼 수 있습니다.
 
 :::
