@@ -1,244 +1,297 @@
-# Finding your hardware
+# 하드웨어 찾기
 
-This section is mostly a mini-guide on how to find what hardware you're currently running; this is mainly relevant for laptop and prebuilt users as hardware specs are a bit more difficult to obtain. You can skip this page and head to [Creating the USB](./installer-guide/) if you already know what hardware you have.
+이 섹션은 대부분 현재 실행 중인 하드웨어를 찾는 방법에 대한 미니 가이드입니다. 하드웨어 사양을 얻기가 조금 더 어렵기 때문에 이것은 주로 노트북 및 사전 구축된 사용자와 관련이 있습니다. 이미 가지고 있는 하드웨어를 알고 있다면 이 페이지를 건너뛰고 [USB 만들기](./installer-guide/)로 이동할 수 있습니다.
 
-For this, we'll assume you have Windows or Linux installed:
+이를 위해 Windows 또는 Linux가 설치되어 있다고 가정합니다.
 
-[[toc]]
+[[Toc]]
 
-## Finding Hardware using Windows
+## Windows를 사용하여 하드웨어 찾기
 
-For this we mainly have 2 options:
+이를 위해 우리는 주로 2가지 옵션이 있습니다:
 
-* Windows' built-in Device Manager
+* 윈도우의 내장 장치 관리자
+
 * [AIDA64](https://www.aida64.com/downloads)
 
-Due to the easier to use GUI, we recommend downloading AIDA64 and running this as it's much easier to grab specs. However we'll show you both methods for obtaining hardware specs.
+GUI를 더 사용하기 쉽기 때문에 사양을 잡기가 훨씬 쉽기 때문에 AIDA64를 다운로드하고 실행하는 것이 좋습니다. 그러나 하드웨어 사양을 얻기 위한 두 가지 방법을 모두 보여 드리겠습니다.
 
-### CPU Model
+### CPU 모델
 
-| AIDA64                                                 | Device Manager                                                |
-|:-------------------------------------------------------|:--------------------------------------------------------------|
+| AIDA64 | 장치 관리자 |
+
+|:---------------------------------------------------------------------|:------------------------------------------------------------------------|
+
 | ![](./images/finding-hardware-md/cpu-model-aida64.png) | ![](./images/finding-hardware-md/cpu-model-devicemanager.png) |
 
-### GPU Model
+### GPU 모델
 
-| AIDA64                                                 | DeviceManager                                                 |
-|:-------------------------------------------------------|:--------------------------------------------------------------|
+| AIDA64 | 장치 관리자 |
+
+|:---------------------------------------------------------------------|:------------------------------------------------------------------------|
+
 | ![](./images/finding-hardware-md/GPU-model-aida64.png) | ![](./images/finding-hardware-md/GPU-model-devicemanager.png) |
 
-### Chipset Model
+### 칩셋 모델
 
-| AIDA64                                                     | DeviceManager                                                     |
-|:-----------------------------------------------------------|:------------------------------------------------------------------|
+| AIDA64 | 장치 관리자 |
+
+|:------------------------------------------------------------------------|:----------------------------------------------------------------|
+
 | ![](./images/finding-hardware-md/chipset-model-aida64.png) | ![](./images/finding-hardware-md/chipset-model-devicemanager.png) |
 
-* Note: Intel SOC based CPUs will have the chipset and other features already on the same die instead of being dedicated chips. This means trying to detect the exact chipset is a bit more difficult
+* 참고: 인텔 SOC 기반 CPU는 전용 칩이 아닌 동일한 다이에 이미 칩셋 및 기타 기능을 가지고 있습니다. 이것은 정확한 칩셋을 감지하는 것이 조금 더 어렵다는 것을 의미합니다.
 
-### Keyboard, Trackpad and Touchscreen Connection Type
+### 키보드, 트랙패드 및 터치스크린 연결 유형
 
-| DeviceManager                                                      |
-|:-------------------------------------------------------------------|
+| 장치 관리자 |
+
+|:--------------------------------------------------------------------------------|
+
 | ![](./images/finding-hardware-md/trackpad-model-devicemanager.png) |
 
-AIDA64 unfortunately doesn't provide any useful info regarding pointer devices, so we recommend using DeviceManager for this.
+안타깝게도 AIDA64는 포인터 장치에 대한 유용한 정보를 제공하지 않으므로 이를 위해 DeviceManager를 사용하는 것이 좋습니다.
 
-* You can find these devices under the following:
-  * `Human Interface Devices`
-  * `Keyboards`
-  * `Mice and other Pointer Devices`
+* 다음에서 이러한 장치를 찾을 수 있습니다.
 
-* To view the exact connection type of the device, select the pointer device then enter `View -> Device by Connection`. This will clarify whether it's over PS2, I2C, SMBus, USB, etc
+* `휴먼 인터페이스 장치`
 
-Depending on the device, it may show up under multiple names and connections. The main ones to keep an eye on:
-  
-::: details SMBus
-  
-These will show up as a straight PCI device such as `Synaptics SMBus Driver` or `ELAN SMBus Driver`
+* `키보드`
 
-* Synaptics devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptics SMBus Driver`
+* `쥐 및 기타 포인터 장치`
+
+* 장치의 정확한 연결 유형을 보려면 포인터 장치를 선택한 다음 `보기 -> 연결별 장치`를 입력하십시오. 이것은 PS2, I2C, SMBus, USB 등을 통해 있는지 여부를 명확히 할 것입니다.
+
+기기에 따라 여러 이름과 연결 아래에 표시될 수 있습니다. 주목해야 할 주요 사항:
+
+::: 세부 사항 SMBus
+
+이것들은 `Synaptics SMBus Driver` 또는 `ELAN SMBus Driver`와 같은 직선 PCI 장치로 나타날 것입니다.
+
+* 시냅틱 장치는 PS2 아래에 `시냅틱스 PS2 장치`/`시냅틱스 포인팅 장치`와 PCI 아래에 `시냅틱스 SMBus 드라이버`로 표시됩니다.
 
 ![](./images/finding-hardware-md/Windows-SMBus-Device.png)
 
-As you can see, we get 2 Synaptics devices in the left image, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus generally provides better gesture support and accuracy.
+보시다시피, 왼쪽 이미지에 2개의 Synaptics 장치가 있지만, 자세히 살펴보면 상단 장치는 PS2이고 하단 장치는 SMBus입니다. 어느 모드에서든 트랙패드를 사용할 수 있지만, SMBus는 일반적으로 더 나은 제스처 지원과 정확성을 제공합니다.
 
 :::
 
-::: details USB
+::: 세부 사항 USB
 
-| Device by Type | Device by Connection |
+| 유형별 장치 | 연결별 장치 |
+
 | :--- | :--- |
+
 | ![](./images/finding-hardware-md/USB-trackpad-normal.png) | ![](./images/finding-hardware-md/USB-trackpad-by-connection.png)
 
-These will show up as a `PS2 Compliant Trackpad`, as well under USB when we switch our connection view to `Device by Connection`
+연결 보기를 `연결별 장치`로 전환할 때 USB 아래에도 'PS2 호환 트랙패드'로 표시됩니다.
 
 :::
 
-::: details I2C
+::: 세부 사항 I2C
 
-![](./images/finding-hardware-md/i2c-trackpad.png)
-These will almost always show up as a Microsoft HID device, though can appear as other trackpads as well. They will always show up under I2C though.
+![](./Images/finding-hardware-md/i2c-trackpad.png)
+
+이것들은 거의 항상 Microsoft HID 장치로 표시되지만 다른 트랙패드로도 나타날 수 있습니다. 하지만 그들은 항상 I2C 아래에 나타날 것이다.
 
 :::
-  
-### Audio Codec
 
-| AIDA64                                                        | DeviceManager                                                     |
-|:--------------------------------------------------------------|:------------------------------------------------------------------|
+### 오디오 코덱
+
+| AIDA64 | 장치 관리자 |
+
+|:--------------------------------------------------------------------------------|:----------------------------------------------------------------|
+
 | ![](./images/finding-hardware-md/audio-controller-aida64.png) | ![](./images/finding-hardware-md/audio-controller-aida64.png.png) |
 
-Due to how certain OEMs present device names, the most accurate info you can get with DeviceManager is via the PCI ID(ie. pci 14F1,50F4). This means you'll need to google the ID and figure out the exact device ID, however AIDA64 can present the name properly which is quite a bit easier on the end user.
+특정 OEM이 장치 이름을 표시하는 방식 때문에 DeviceManager로 얻을 수 있는 가장 정확한 정보는 PCI ID(예: pci 14F1,50F4)를 통한 것입니다. 이것은 당신이 ID를 구글링하고 정확한 장치 ID를 알아내야 한다는 것을 의미하지만, AIDA64는 최종 사용자에게는 훨씬 더 쉬운 이름을 적절하게 제시할 수 있습니다.
 
-### Network Controller models
+### 네트워크 컨트롤러 모델
 
-| AIDA64                                                 | Device Manager                                                |
-|:-------------------------------------------------------|:--------------------------------------------------------------|
+| AIDA64 | 장치 관리자 |
+
+|:---------------------------------------------------------------------|:------------------------------------------------------------------------|
+
 | ![](./images/finding-hardware-md/nic-model-aida64.png) | ![](./images/finding-hardware-md/nic-model-devicemanager.png) |
 
-Due to how certain OEMs present device names, the most accurate info you can get with Device Manager is via the PCI ID (ie. `PCI\VEN_14E4&DEV_43A0` corresponds to a vendor ID of `14E4` and a device ID of `43A0`). This means you'll need to Google the ID and figure out the exact device ID; however, AIDA64 can present the name properly which can be quite a bit easier.
+특정 OEM이 장치 이름을 제시하는 방식 때문에 장치 관리자로 얻을 수 있는 가장 정확한 정보는 PCI ID(예: `PCI\VEN_14E4&DEV_43A0`은 `14E4`의 공급 업체 ID와 `43A0`의 장치 ID에 해당합니다. 이것은 당신이 ID를 구글링하고 정확한 장치 ID를 알아내야 한다는 것을 의미합니다. 그러나 AIDA64는 이름을 적절하게 제시할 수 있어 훨씬 쉬울 수 있습니다.
 
-### Drive Model
+### 드라이브 모델
 
-| AIDA64                                                  | Device Manager                                                 |
-|:--------------------------------------------------------|:---------------------------------------------------------------|
+| AIDA64 | 장치 관리자 |
+
+|:--------------------------------------------------------|:------------------------------------------------------------------------|
+
 | ![](./images/finding-hardware-md/disk-model-aida64.png) | ![](./images/finding-hardware-md/disk-model-devicemanager.png) |
 
-Due to OEMs not providing much details about the drive, you'll need to Google a bit which drive matches up with the displayed name.
+OEM이 드라이브에 대한 세부 사항을 많이 제공하지 않기 때문에 어떤 드라이브가 표시된 이름과 일치하는지 구글링해야 합니다.
 
-## Finding Hardware using Linux
+## 리눅스를 사용하여 하드웨어 찾기
 
-For finding hardware using Linux, we'll be using a few tools:
+리눅스를 사용하여 하드웨어를 찾기 위해, 우리는 몇 가지 도구를 사용할 것입니다:
 
 * `pciutils`
+
 * `dmidecode`
 
-Below you'll find a list of commands to run in the terminal, thankfully most Linux distros will come with these tools already installed. If not, you will likely find them in your distro's package manager.
+아래에서 터미널에서 실행할 명령 목록을 찾을 수 있습니다. 고맙게도 대부분의 Linux 배포판은 이러한 도구가 이미 설치되어 있습니다. 그렇지 않다면 배포자의 패키지 관리자에서 찾을 수 있습니다.
 
-### CPU Model
+### CPU 모델
 
-```sh
-grep -i "model name" /proc/cpuinfo
+```쉿
+
+Grep -i "모델 이름" /proc/cpuinfo
+
 ```
 
-### GPU Model
+### GPU 모델
 
-```sh
-lspci | grep -i --color "vga\|3d\|2d"
+```쉿
+
+Lspci | grep -i --color "vga\|3d\|2d"
+
 ```
 
-### Chipset Model
+### 칩셋 모델
 
-```sh
-dmidecode -t baseboard
+```쉿
+
+Dmidecode -t 베이스보드
+
 ```
 
-### Keyboard, Trackpad and  Touchscreen Connection Type
+### 키보드, 트랙패드 및 터치스크린 연결 유형
 
-```sh
-dmesg | grep -i input
+```쉿
+
+Dmesg | grep -i 입력
+
 ```
 
-### Audio Codec
+### 오디오 코덱
 
-```sh
-aplay -l
+```쉿
+
+에이플레이 -l
+
 ```
 
-### Network Controller models
+### 네트워크 컨트롤러 모델
 
-Basic info:
+기본 정보:
 
-```sh
-lspci | grep -i network
+```쉿
+
+Lspci | grep -i 네트워크
+
 ```
 
-More in-depth info:
+더 심층적인 정보:
 
-```sh
-lshw -class network
+```쉿
+
+Lshw -클래스 네트워크
+
 ```
 
-### Drive Model
+### 드라이브 모델
 
-```sh
-lshw -class disk -class storage
+```쉿
+
+Lshw -클래스 디스크 -클래스 스토리지
+
 ```
 
-## Finding Hardware using OCSysInfo
+## OCSysInfo를 사용하여 하드웨어 찾기
 
-There are 2 methods of obtaining and running OCSysInfo:
+OCSysInfo를 얻고 실행하는 2가지 방법이 있습니다.
 
-* [Precompiled binaries](https://github.com/KernelWanderers/OCSysInfo/releases)
-* Manually cloning the [repository](https://github.com/KernelWanderers/OCSysInfo)
+* [사전 컴파일된 바이너리](https://github.com/KernelWanderers/OCSysInfo/releases)
 
-::: tip
-We recommend you download [the binaries](https://github.com/KernelWanderers/OCSysInfo/releases), as it is the simplest and easiest method.
+* [리포지토리]를 수동으로 복제하기(https://github.com/KernelWanderers/OCSysInfo)
 
-If you want to learn more about manually cloning the repository, you can check out the OCSysInfo [mini-guide](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide).
+::: 팁
+
+가장 간단하고 쉬운 방법이기 때문에 [이진](https://github.com/KernelWanderers/OCSysInfo/releases)를 다운로드하는 것이 좋습니다.
+
+저장소를 수동으로 복제하는 것에 대해 자세히 알고 싶다면 OCSysInfo [mini-guide](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide)를 확인할 수 있습니다.
+
 :::
 
-### Discovering hardware
+### 하드웨어 발견하기
 
-::: warning
-Laptop users: before we start, we advise you to disconnect any external USB devices, as this may lead to ambiguous or unnecessary information collected which may confuse you.
+::: 경고
+
+노트북 사용자: 시작하기 전에 외부 USB 장치를 분리하는 것이 좋습니다. 이렇게 하면 모호하거나 불필요한 정보가 수집되어 혼란스러울 수 있습니다.
+
 :::
 
-After you've successfully installed and ran the application, you should be greeted with the following screen:
+응용 프로그램을 성공적으로 설치하고 실행하면 다음 화면이 표시됩니다.
 
-![](./images/finding-hardware-md/ocsysinfo-example.png)
+![](./Images/finding-hardware-md/ocsysinfo-example.png)
 
-From here, you can type in `d` and press `ENTER`/`RETURN`, after, you should be greeted with a similar-looking screen:
+여기에서 `d`를 입력하고 `ENTER`/`RETURN`을 누르면 비슷한 화면이 나타납니다.
 
-![](./images/finding-hardware-md/ocsysinfo-hwdisc.png)
+![](./Images/finding-hardware-md/ocsysinfo-hwdisc.png)
 
-### CPU Model
+### CPU 모델
 
-![](./images/finding-hardware-md/cpu-model-ocsysinfo.png)
+![](./Images/finding-hardware-md/cpu-model-ocsysinfo.png)
 
-Besides the CPU model, it also lists the CPU's codename, highest SSE version supported and SSSE3 availability.
+CPU 모델 외에도 CPU의 코드명, 지원되는 최고 SSE 버전 및 SSSE3 가용성도 나열합니다.
 
-### GPU Model
+### GPU 모델
 
-![](./images/finding-hardware-md/gpu-model-ocsysinfo.png)
+![](./Images/finding-hardware-md/gpu-model-ocsysinfo.png)
 
-In this case, the machine has two GPUs:
+이 경우 컴퓨터에는 두 개의 GPU가 있습니다.
 
-* iGPU (Intel UHD Graphics 630)
+* iGPU (인텔 UHD 그래픽 630)
+
 * dGPU (AMD Radeon R9 390X)
 
-Besides the model names, it also lists the GPUs' codename, ACPI & PCI path, which you may soon find useful as you progress in your hackintosh journey.
+모델 이름 외에도 GPU의 코드명, ACPI 및 PCI 경로도 나열되어 있으며, 이는 hackintosh 여정을 진행함에 따라 곧 유용할 수 있습니다.
 
-### Keyboard and Trackpad Connection Type
+### 키보드 및 트랙패드 연결 유형
 
-::: details SMBus Trackpad
-![](./images/finding-hardware-md/id-smbus-ocsysinfo.png)
-Trackpad: `SMBus` <br /> Keyboard: `PS/2`
+::: SMBus 트랙패드 세부 정보
 
-Credit for providing image: [ThatCopy](https://github.com/ThatCopy)
+![](./Images/finding-hardware-md/id-smbus-ocsysinfo.png)
+
+트랙패드: `SMBus` <br /> 키보드: `PS/2`
+
+이미지 제공에 대한 크레딧: [ThatCopy](https://github.com/ThatCopy)
+
 :::
 
-::: details I2C Trackpad
-![](./images/finding-hardware-md/id-i2c-ocsysinfo.png)
-Trackpad: `I2C` <br /> Keyboard: `PS/2`
+::: 세부 사항 I2C 트랙패드
 
-Credit for providing image: [Mahas](https://github.com/Mahas1)
+![](./Images/finding-hardware-md/id-i2c-ocsysinfo.png)
+
+트랙패드: `I2C` <br /> 키보드: `PS/2`
+
+이미지 제공에 대한 크레딧: [Mahas](https://github.com/Mahas1)
+
 :::
 
-::: details PS/2 Trackpad
-![](./images/finding-hardware-md/id-ps2-ocsysinfo.png)
-Trackpad: `PS/2` <br /> Keyboard: `PS/2`
+::: 세부 사항 PS/2 트랙패드
 
-Credit for providing image: [Tasty0](https://github.com/Tasty0)
+![](./Images/finding-hardware-md/id-ps2-ocsysinfo.png)
+
+트랙패드: `PS/2` <br /> 키보드: `PS/2`
+
+이미지 제공에 대한 크레딧: [Tasty0](https://github.com/Tasty0)
+
 :::
 
-### Audio codec
+### 오디오 코덱
 
-![](./images/finding-hardware-md/audio-codec-ocsysinfo.png)
+![](./Images/finding-hardware-md/audio-codec-ocsysinfo.png)
 
-### Network models
+### 네트워크 모델
 
-![](./images/finding-hardware-md/network-model-ocsysinfo.png)
+![](./Images/finding-hardware-md/network-model-ocsysinfo.png)
 
-### Drive model
+### 드라이브 모델
 
-![](./images/finding-hardware-md/drive-model-ocsysinfo.png)
+![](./Images/finding-hardware-md/drive-model-ocsysinfo.png)
