@@ -695,105 +695,61 @@ BlueToolFixup은 Lilu 이후 어디에나 있을 수 있습니다.
 ### 데스크탑
 
 | 플랫폼 | **CPU** | **EC** | **AWAC** | **NVRAM** | **USB** |
-
 | :-------: | :-----: | :----: | :-----: | :-------: | :-----: |
-
 | 펜린 | 해당 없음 | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | 해당 없음 | 해당 없음 | 해당 없음 |
-
 | 린필드와 클라크데일 | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (설치 후 실행) | ^^ | ^^ | ^^ | | ^^ |
-
 | 아이비 브리지 | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ | ^^ |
-
 | 브로드웰 | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | 스카이레이크 | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ |
-
 | 카비 호수 | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | 커피 레이크 | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
-
 | 혜성 호수 | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
-
 | AMD (15/16h) | 해당 없음 | ^^ | 해당 없음 | ^^ | 해당 없음 |
-
 | AMD (17/19h) | [B550 및 A520용 SSDT-CPUR](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ | | ^^ |
 
 ### 하이엔딩 데스크탑
 
 | 플랫폼 | **CPU** | **EC** | **RTC** | **PCI** |
-
 | :-------: | :-----: | :----: | :-----: | :-----: |
-
 | 네할렘과 웨스트미어 | 해당 없음 | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | 해당 없음 | 해당 없음 |
-
 | 샌디 브리지-E | ^^ | ^^ | ^^ | [SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/unc0) |
-
 | 아이비 브리지-E | ^^ | ^^ | ^^ | ^^ |
-
 | Haswell-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-RTC0-RANGE](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ |
-
 | 브로드웰-E | ^^ | ^^ | ^^ | ^^ |
-
 | 스카이레이크-X | ^^ | ^^ | ^^ | 해당 없음 |
 
 ### 노트북
 
 | 플랫폼 | **CPU** | **EC** | **백라이트** | **I2C 트랙패드** | **AWAC** | **USB** | **IRQ** |
-
 | :-------: | :-----: | :----: | :----------------: | :-------------: | :-----: | :-----: | :-----: |
-
 | Clarksfield and Arrandale | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | N/A | N/A | N/A | [IRQ SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) |
-
 | 샌디브릿지 | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (설치 후 실행) | ^^ | ^^ | ^^ | ^^ | | ^^ | ^^ |
-
 | 아이비 브리지 | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | [SSDT-GPI0](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html) | ^^ | ^^ | ^^ |
-
 | 브로드웰 | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | 스카이레이크 | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ | ^^ | N/A |
-
 | 카비 호수 | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | 커피 레이크(8세대)와 위스키 레이크 | ^^ | ^^ | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ | ^^ |
-
 | 커피 호수 (9세대) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | 혜성 호수 | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-
 | 아이스 레이크 | ^^ | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) | ^^ |
 
 계속:
 
 | 플랫폼 | **NVRAM** | **IMEI** |
-
 | :-------: | :-------: | :------: |
-
 | 클락스필드와 아랜데일 | 해당 없음 | 해당 없음 |
-
 | 샌디 브리지 | ^^| [SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/imei.html) |
-
 | 아이비 브리지 | ^^ | ^^ |
-
 | 하스웰 | ^^ | 해당 없음 |
-
 | 브로드웰 | ^^ | ^^ |
-
 | 스카이레이크 | ^^ | ^^ |
-
 | 카비 호수 | ^^ | ^^ |
-
 | 커피 호수(8세대)와 위스키 호수 | ^^ | ^^ |
-
 | 커피 호수 (9세대) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
-
 | 혜성 호수 | 해당 없음 | ^^ |
-
 | 얼음 호수 | ^^ | ^^ |
 
 # 이제 이 모든 것이 끝났으니 [ACPI 시작하기](https://dortania.github.io/Getting-Started-With-ACPI/)로 가세요.rarely have mic support
