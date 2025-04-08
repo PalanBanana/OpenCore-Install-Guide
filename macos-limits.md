@@ -151,3 +151,134 @@ GPU 지원은 시중에 거의 무한한 양의 GPU가 있기 때문에 훨씬 �
 그리고 **이산형 노트북에 대한 중요 참고 사항 GPU**:
 
 * 개별 GPU의 90%는 macOS에서 지원하지 않는 구성(전환 가능한 그래픽)으로 연결되어 있기 때문에 작동하지 않습니다. NVIDIA 개별 GPU의 경우 일반적으로 Optimus라고 합니다.
+* 이러한 개별 GPU는 내부 디스플레이를 위한 것이므로 일반적으로 이를 비활성화하고 전원을 끄는 것이 좋습니다(이 가이드의 후반부에서 다룹니다).
+* 그러나 일부 경우 개별 GPU는 작동할 수도 있고 작동하지 않을 수도 있는 외부 출력(HDMI, 미니 디스플레이포트 등)에 전원을 공급합니다. 작동하는 경우 카드를 켜고 실행해야 합니다.
+* 그러나 전환 가능한 그래픽이 없는 노트북이 드물게 있으므로 개별 카드를 사용할 수 있지만(macOS에서 지원하는 경우) 배선 및 설정으로 인해 일반적으로 문제가 발생합니다.
+
+**지원되는 GPU의 전체 목록은 [GPU 구매자 가이드](https://dortania.github.io/GPU-Buyers-Guide/)를 참조하세요.**
+
+::: 세부 정보 Intel GPU 지원 차트
+
+| GPU 세대 | 초기 지원 | 마지막 지원 버전 | 참고 사항 |
+| :--- | :--- | :--- | :--- |
+| [3세대 GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Third_generation) | 10.4.1 | 10.7.5 | [32비트 커널 및 패치 필요](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/) |
+| [4세대 GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen4) | 10.5.0 | ^^ | ^^ |
+| [Arrandale(HD Graphics)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen5) | 10.6.4 | 10.13.6 | LVDS만 지원되고 eDP 및 외부 출력은 지원되지 않음 |
+| [샌디 브릿지(HD 3000)](https://en.wikipedia.org/wiki/인텔_그래픽_처리_단위_목록#Gen6) | 10.6.7 | ^^ | 없음 |
+| [아이비 브릿지(HD 4000)](https://en.wikipedia.org/wiki/인텔_그래픽_처리_단위_목록#Gen7) | 10.7.3 | 11.7.x | ^^ |
+| [하스웰(HD 4XXX, 5XXX)](https://en.wikipedia.org/wiki/인텔_그래픽_처리_단위_목록#Gen7) | 10.8.5 | 12.6.x | ^^ |
+| [브로드웰(5XXX, 6XXX)](https://en.wikipedia.org/wiki/인텔_그래픽_처리_단위_목록#Gen8) | 10.10.0 | ^^ | ^^ |
+| [스카이레이크(HD 5XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.11.0 | ^^ | ^^ |
+| [캐비레이크(HD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.12.4 | <span style="color:green"> 현재 </span> | ^^ |
+| [커피레이크(UHD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.13.6 | ^^ | ^^ |
+| [코멧레이크(UHD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.15.4 | ^^ | ^^ |
+| [아이스 레이크(Gx)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen11) | 10.15.4 | ^^ | boot-args에 `-igfxcdc` 및 `-igfxdvmt`가 필요합니다 |
+| [타이거 레이크(Xe)](https://en.wikipedia.org/wiki/Intel_Xe) | <span style="color:red"> 해당 없음 </span> | <span style="color:red"> 해당 없음 </span> | <span style="color:red"> 사용 가능한 드라이버가 없습니다 </span> |
+| [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | <span style="color:red"> 없음 </span> | <span style="color:red"> 없음 </span> | <span style="color:red"> 드라이버가 없습니다 </span> |
+
+:::
+
+::: 세부 정보 AMD GPU 지원 차트
+
+| GPU 세대 | 초기 지원 | 마지막 지원 버전 | 참고 |
+| :--- | :--- | :--- | :--- |
+| [X800](https://en.wikipedia.org/wiki/Radeon_X800_series) | 10.3.x | 10.7.5 | 32비트 커널 필요 |
+| [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | ^^ | 없음 |
+| [TeraScale](https://en.wikipedia.org/wiki/TeraScale_(마이크로아키텍처)) | 10.4.x | 10.13.6 | ^^ |
+| [TeraScale 2/3](https://en.wikipedia.org/wiki/TeraScale_(마이크로아키텍처)) | 10.6.x | ^^ | ^^ |
+| [GCN 1](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.8.3 | 12.6.x | ^^ |
+| [GCN 2/3](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.10.x | ^^ | ^^ |
+| [Polaris 10](https://en.wikipedia.org/wiki/Radeon_RX_400_series), [20](https://en.wikipedia.org/wiki/Radeon_RX_500_series) | 10.12.1 | <span style="color:green"> 현재 </span> | ^^ |
+| [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
+| [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
+| [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | 부팅 인수에 `agdpmod=pikera`가 필요합니다 |
+| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | <span style="color:yellow"> 현재 일부 Navi 21 모델만 작동 중입니다 </span> |
+
+:::
+
+::: 세부 정보 NVIDIA GPU 지원 차트
+
+| GPU 세대 | 초기 지원 | 마지막 지원 버전 | 참고 |
+| :--- | :--- | :--- | :--- |
+| [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | 32비트 커널과 [NVCAP 패치](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) 필요 |
+| [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | ^^ | [NVCAP 패치 필요](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) |
+| [테슬라](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)) | 10.4.x | 10.13.6 | ^^ |
+| [테슬라 v2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | ^^ | ^^ |
+| [페르미](https://en.wikipedia.org/wiki/Fermi_(microarchitecture)) | 10.7.x | ^^ | ^^ |
+| [케플러](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.7.x | 11.7.x | 없음 |
+| [케플러 v2](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.8.x | ^^ | ^^ |
+| [맥스웰](https://en.wikipedia.org/wiki/맥스웰_(microarchitecture)) | 10.10.x | 10.13.6 | [NVIDIA 웹 드라이버 필요](https://www.nvidia.com/download/driverResults.aspx/149652/) |
+| [Pascal](https://en.wikipedia.org/wiki/Pascal_(microarchitecture)) | 10.12.4 | ^^ | ^^ |
+| [Turing](https://en.wikipedia.org/wiki/Turing_(microarchitecture)) | <span style="color:red"> 없음 </span> | <span style="color:red"> 없음 </span> | <span style="color:red"> 드라이버 없음 </span> |
+| [Ampere](https://en.wikipedia.org/wiki/Ampere_(microarchitecture)) | ^^ | ^^ | ^^ |
+
+:::
+
+## 마더보드 지원
+
+대부분의 경우 CPU만 지원된다면 모든 마더보드가 지원됩니다.
+
+::: 세부 정보 MSI 500 시리즈 AMD 마더보드 참고
+
+~~MSI 500 시리즈 AMD 마더보드(A520, B550, X570)는 예외입니다. 이 마더보드는 macOS Monterey 이상에서 문제가 있습니다.~~
+
+* ~~PCIe 장치가 항상 제대로 열거되지 않습니다~~
+* ~~Zen 3 지원을 위한 BIOS 업데이트가 부팅을 중단합니다~~
+
+~~macOS Big Sur 또는 이전 버전이 이러한 마더보드에 권장됩니다~~
+
+CaseySJ 덕분에 최신 버전의 AMD vanilla 패치에서 이 문제가 해결되었습니다!
+
+:::
+
+## 스토리지 지원
+
+대부분의 경우 모든 SATA 기반 드라이브가 지원되고 대부분의 NVMe 드라이브도 지원됩니다. 몇 가지 예외가 있습니다.
+
+* **Samsung PM981, PM991 및 Micron 2200S NVMe SSD**
+* 이러한 SSD는 기본적으로 호환되지 않으므로(커널 패닉 발생) 이러한 커널 패닉을 해결하려면 [NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases)가 필요합니다. 이러한 드라이브는 NVMeFix.kext를 사용하더라도 부팅 문제를 일으킬 수 있습니다.
+* 관련 사항으로, Samsung 970 EVO Plus NVMe SSD도 동일한 문제가 있었지만 펌웨어 업데이트에서 해결되었습니다. 업데이트(Samsung Magician을 통한 Windows 또는 부팅 가능한 ISO)를 [여기](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/)에서 받으세요.
+* 또한, HDD 가속을 위해 [Intel Optane Memory](https://www.intel.com/content/www/us/en/architecture-and-technology/optane-memory.html) 또는 [Micron 3D XPoint](https://www.micron.com/products/advanced-solutions/3d-xpoint-technology)를 사용하는 노트북은 macOS에서 지원되지 않습니다. 일부 사용자는 Catalina에서 읽기 및 쓰기 지원까지 성공했다고 보고했지만 잠재적인 부팅 문제를 방지하기 위해 드라이브를 제거하는 것이 좋습니다.
+* Intel Optane Memory H10/H20 모델은 macOS에서 Optane 부분이 비활성화된 경우 호환됩니다. 자세한 내용은 [여기](https://blog.csdn.net/weixin_46341175/article/details/126626808)에서 확인할 수 있습니다([원문 중국어 출처](https://zhuanlan.zhihu.com/p/429073173)).
+
+* **Intel 600p**
+* 부팅할 수 없는 것은 아니지만 이 모델은 수많은 문제를 일으킬 수 있습니다. [Intel 600p NVMe 드라이브에 대한 수정 사항이 있나요? #1286](https://github.com/acidanthera/bugtracker/issues/1286)
+* 660p 모델은 괜찮습니다.
+
+## 유선 네트워킹
+
+거의 모든 유선 네트워크 어댑터는 macOS에서 기본 제공 드라이버나 커뮤니티에서 만든 kext를 통해 어떤 형태로든 지원됩니다. 주요 예외:
+
+* Intel I225-V 2.5Gb NIC
+* 하이엔드 데스크톱 Comet Lake 보드에서 발견
+* 장치 속성 필요: [출처](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) 및 [예](config.plist/comet-lake.md#deviceproperties)
+* Intel I350 1Gb 서버 NIC
+* 일반적으로 다양한 세대의 Intel 및 Supermicro 서버 보드에서 발견
+* [장치 속성 필요](config-HEDT/ivy-bridge-e.md#deviceproperties)
+* Intel 10Gb 서버 NIC
+* [X520 및 X540]에 대한 해결 방법이 가능합니다. 칩셋](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
+* Mellanox 및 Qlogic 서버 NIC
+
+## 무선 네트워킹
+
+노트북과 함께 제공되는 대부분의 WiFi 카드는 일반적으로 Intel/Qualcomm이므로 지원되지 않습니다. 운이 좋다면 지원되는 Atheros 카드가 있을 수 있지만 High Sierra까지만 지원됩니다.
+
+가장 좋은 옵션은 지원되는 Broadcom 카드를 구입하는 것입니다. 권장 사항은 [WiFi 구매자 가이드](https://dortania.github.io/Wireless-Buyers-Guide/)를 참조하세요.
+
+참고: Intel WiFi는 macOS에서 비공식적으로(타사 드라이버) 지원됩니다. 드라이버 및 지원되는 카드에 대한 자세한 내용은 [WiFi 구매자 가이드](https://dortania.github.io/Wireless-Buyers-Guide/)를 확인하세요.
+
+## 기타
+
+* **지문 센서**
+* 현재 Touch ID 센서를 에뮬레이션할 방법이 없으므로 지문 센서는 작동하지 않습니다.
+* **Windows Hello 얼굴 인식**
+* 일부 노트북에는 I2C로 연결된(그리고 iGPU를 통해 사용되는) WHFR이 함께 제공되며 작동하지 않습니다.
+* 일부 노트북에는 USB로 연결된 WHFR이 함께 제공되며 운이 좋으면 카메라 기능은 사용할 수 있지만 그 외의 기능은 사용할 수 없습니다.
+* **Intel Smart Sound Technology**
+* Intel SST가 있는 노트북은 아무것도 연결되어 있지 않으면 작동하지 않습니다(일반적으로 내장 마이크). 지원되지 않기 때문입니다. Windows의 장치 관리자에서 확인할 수 있습니다.
+* **헤드폰 잭 콤보**
+* 콤보 헤드폰 잭이 있는 일부 노트북은 이를 통해 오디오 입력을 받지 못할 수 있으며 내장 마이크나 USB를 통한 외부 오디오 입력 장치를 사용해야 합니다.
+* **Thunderbolt USB-C 포트**
+* (Hackintosh) Thunderbolt 지원은 현재 macOS에서 여전히 불확실하며, 대부분의 최신 노트북에 있는 Alpine Ridge 컨트롤러의 경우 더욱 그렇습니다. 컨트롤러의 전원을 켜두어 Thunderbolt와 USB-C 핫플러그가 작동하도록 하려는 시도가 있었지만, 커널 패닉 및/또는 절전 모드 이후 USB-C가 중단되는 대가를 치렀습니다. 포트의 USB-C 쪽을 사용하여 절전 모드로 전환하려면 부팅 시 플러그를 꽂고 플러그를 꽂아 두어야 합니다.
+* 참고: 이는 USB-C 전용 포트에는 적용되지 않으며 Thunderbolt 3와 USB-C가 결합된 포트에만 적용됩니다.
+* BIOS에서 Thunderbolt를 비활성화하면 이 문제가 해결됩니다.
