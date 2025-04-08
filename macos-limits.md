@@ -93,4 +93,61 @@ Vanilla 커널 기반 지원(즉, 수정 없음):
 | [펜린](https://en.wikipedia.org/wiki/Penryn_(마이크로아키텍처)) | 10.4.10 | 10.13.6 | SSE4.2 없음 | 0x010676 |
 | [네할렘](https://en.wikipedia.org/wiki/Nehalem_(마이크로아키텍처)) | 10.5.6 | <span style="color:green"> 현재 </span> | 해당 없음 | 0x0106A2 |
 | [린필드](https://en.wikipedia.org/wiki/Lynnfield_(마이크로프로세서)), [클락스필드](https://en.wikipedia.org/wiki/Clarksfield_(마이크로프로세서)) | 10.6.3 | ^^ | iGPU 지원 없음 10.14+ | 0x0106E0 |
-| [웨스트미어, 클라크데일, 애런데일](https://en.w
+| [웨스트미어, 클라크데일, 애런데일](https://en.wikipedia.org/wiki/Westmere_(microarchitecture)) | 10.6.4 | ^^ | ^^ | 0x0206C0 |
+| [샌디 브릿지](https://en.wikipedia.org/wiki/샌디_브릿지) | 10.6.7 | ^^ | ^^ | 0x0206A0(M/H) |
+| [아이비 브릿지](https://en.wikipedia.org/wiki/아이비_브릿지_(microarchitecture)) | 10.7.3 | ^^ | iGPU 지원 안 함 12+ | 0x0306A0(M/H/G) |
+| [아이비 브릿지-E5](https://en.wikipedia.org/wiki/아이비_브릿지_(microarchitecture)) | 10.9.2 | ^^ | 없음 | 0x0306E0 |
+| [Haswell](https://en.wikipedia.org/wiki/Haswell_(마이크로아키텍처)) | 10.8.5 | ^^ | ^^ | 0x0306C0(S) |
+| [브로드웰](https://en.wikipedia.org/wiki/Broadwell_(마이크로아키텍처)) | 10.10.0 | ^^ | ^^ | 0x0306D4(U/Y) |
+| [스카이레이크](https://en.wikipedia.org/wiki/Skylake_(마이크로아키텍처)) | 10.11.0 | ^^ | ^^ | 0x0506e3(H/S) 0x0406E3(U/Y) |
+| [카비레이크](https://en.wikipedia.org/wiki/Kaby_Lake) | 10.12.4 | ^^ | ^^ | 0x0906E9(H/S/G) 0x0806E9(U/Y) |
+| [커피레이크](https://en.wikipedia.org/wiki/Coffee_Lake) | 10.12.6 | ^^ | ^^ | 0x0906EA(S/H/E) 0x0806EA(U)|
+| [앰버](https://en.wikipedia.org/wiki/Kaby_Lake#List_of_8th_ Generation_Amber_Lake_Y_processors), [위스키](https://en.wikipedia.org/wiki/Whiskey_Lake_(마이크로아키텍처)), [코멧 레이크](https://en.wikipedia.org/wiki/Comet_Lake_(마이크로프로세서)) | 10.14.1 | ^^ | ^^ | 0x0806E0(U/Y) |
+| [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.15.4 | ^^ | ^^ | 0x0906E0(S/H)|
+| [Ice Lake](https://en.wikipedia.org/wiki/Ice_Lake_(microprocessor)) | ^^ | ^^ | ^^ | 0x0706E5(U) |
+| [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | ^^ | ^^ | Comet Lake CPUID 필요 | 0x0A0671 |
+| [Tiger Lake](https://en.wikipedia.org/wiki/Tiger_Lake_(microprocessor)) | <span style="color:red"> 없음 </span> | <span style="color:red"> 없음 </span> | <span style="color:red"> 테스트 안 함 </span> | 0x0806C0(U) |
+
+:::
+
+::: macOS의 AMD CPU 제한 사항
+
+불행히도 macOS의 많은 기능은 AMD와 다른 많은 기능이 부분적으로 손상되어 전혀 지원되지 않습니다. 여기에는 다음이 포함됩니다.
+
+* AppleHV에 의존하는 가상 머신
+* 여기에는 VirtualBox, VMWare, Parallels, Docker, Android Studio 등이 포함됩니다.
+* VirtualBox 6, VMware 10 및 Parallels 13.1.0은 자체 하이퍼바이저를 지원하지만 이러한 오래된 VM 소프트웨어를 사용하면 큰 보안 위협이 발생합니다.
+* Adobe 지원
+* Adobe 제품군의 대부분은 Intel의 Memfast 명령어 집합에 의존하여 AMD CPU에서 충돌이 발생합니다.
+* 충돌을 방지하기 위해 RAW 지원과 같은 기능을 비활성화할 수 있습니다. [Adobe 수정](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
+* 32비트 지원
+* Mojave 이하에서 여전히 32비트 소프트웨어에 의존하는 경우 Vanilla 패치는 32비트 명령어를 지원하지 않는다는 점에 유의하세요.
+* 해결 방법은 [사용자 정의 커널](https://files.amd-osx.com/?dir=Kernels), 하지만 iMessage 지원이 손실되고 이러한 커널에 대한 지원이 제공되지 않습니다.
+* 많은 앱의 안정성 문제
+* 오디오 기반 앱은 문제가 가장 발생하기 쉽습니다. 즉, Logic Pro
+* DaVinci Resolve도 산발적인 문제가 있는 것으로 알려져 있습니다.
+
+:::
+
+## GPU 지원
+
+GPU 지원은 시중에 거의 무한한 양의 GPU가 있기 때문에 훨씬 더 복잡해졌지만, 일반적인 세부 사항은 다음과 같습니다.
+
+* AMD의 GCN 기반 GPU는 최신 버전의 macOS에서 지원됩니다.
+* AMD APU는 지원되지 않습니다.
+* Polaris 시리즈의 AMD [Lexa 기반 코어](https://www.techpowerup.com/gpu-specs/amd-lexa.g806)도 지원되지 않습니다.
+* MSI Navi 사용자를 위한 특별 참고 사항: [설치 프로그램이 5700XT에서 작동하지 않음 #901](https://github.com/acidanthera/bugtracker/issues/901)
+* 이 문제는 더 이상 macOS 11(Big Sur)에서 발생하지 않습니다.
+* NVIDIA의 GPU 지원은 복잡합니다.
+ * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) 및 [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPU는 macOS 10.13: High Sierra로 제한됩니다.
+ * [NVIDIA의 Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPU는 **모든 macOS 버전에서 지원되지 않습니다**
+ * [NVIDIA Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPU는 **모든 macOS 버전에서 지원되지 않습니다**
+ * [엔비디아의 Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPU는 macOS 11까지 지원됩니다: Big Sur
+* Intel의 [GT2+ 티어](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) 시리즈 iGPU
+* Ivy Bridge부터 Ice Lake iGPU 지원은 이 가이드에서 다룹니다
+* GMA 시리즈 iGPU에 대한 정보는 여기에서 찾을 수 있습니다: [GMA 패치](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* GT2는 iGPU 티어를 말하며, Pentium, Celeron 및 Atom에서 찾을 수 있는 로우엔드 GT1 iGPU는 macOS에서 지원되지 않습니다
+
+그리고 **이산형 노트북에 대한 중요 참고 사항 GPU**:
+
+* 개별 GPU의 90%는 macOS에서 지원하지 않는 구성(전환 가능한 그래픽)으로 연결되어 있기 때문에 작동하지 않습니다. NVIDIA 개별 GPU의 경우 일반적으로 Optimus라고 합니다.
