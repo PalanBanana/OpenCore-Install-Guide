@@ -1,44 +1,45 @@
-# Terminology
+# 용어
 
-Term | Description
+용어 | 설명
 --- | ---
-**macOS**        | Apple's own UNIX based OS used for Mac machines and "What makes a Mac a Mac".  
-**Windows**      | Microsoft's proprietary OS that is used and supported on a wide range of devices (stay with this OS if you don't want headaches)  
-**Linux**        | Family of open source Unix-like operating systems based on the Linux kernel, an operating system kernel first released on September 17, 1991, by Linus Torvalds. Linux is typically packaged in a Linux distribution. Note that while macOS and Linux may be UNIX-based, they're vastly different.
-**Distros**      | Short for Distributions. Linux distros are how Linux is distributed. However, when it comes to macOS, distros are mixed macOS installers with a bunch of tools that are not from Apple. **Do not use macOS distros.**  
-**Hackintosh**   | The process of installing macOS onto a PC, note that **Hackintosh IS NOT the OS**, it can also refer to the machine that was "hacked" to get macOS running on it. EG: *I installed macOS on this Windows machine, therefore I have a Hackintosh. But I did NOT install "Hackintosh".*  
-**Bootloader**   | Piece of software that loads an OS, usually made by the OS creators. OpenCore is technically not a bootloader per se (see boot manager explanation down below). Apple's Boot.efi would be the actual boot loader in a Mac or Hackintosh.
-**Boot Manager** | Piece of software that manages bootloaders – we have many of these: Clover, systemd-boot, OpenCore, rEFInd, rEFIt... These are generally seen as prepping the system for the actual boot loader.
+**macOS** | Mac 머신에 사용되는 Apple의 자체 UNIX 기반 OS 및 "Mac을 Mac으로 만드는 것".
+**Windows** | 광범위한 기기에서 사용되고 지원되는 Microsoft의 독점 OS(두통을 원하지 않는다면 이 OS를 계속 사용하세요)
+**Linux** | 1991년 9월 17일 Linus Torvalds가 처음 출시한 운영 체제 커널인 Linux 커널을 기반으로 하는 오픈 소스 Unix 유사 운영 체제 제품군입니다. Linux는 일반적으로 Linux 배포판에 패키지로 제공됩니다. macOS와 Linux는 UNIX 기반일 수 있지만 매우 다릅니다.
+**Distros** | Distributions의 약자입니다. Linux 배포판은 Linux가 배포되는 방식입니다. 그러나 macOS의 경우 배포판은 Apple에서 제공하지 않는 여러 도구가 포함된 macOS 설치 프로그램이 혼합된 것입니다. **macOS 배포판을 사용하지 마세요.**
+**Hackintosh** | PC에 macOS를 설치하는 과정, **Hackintosh는 OS가 아닙니다**, macOS를 실행하기 위해 "해킹"된 컴퓨터를 지칭할 수도 있습니다. 예: *저는 이 Windows 컴퓨터에 macOS를 설치했으므로 Hackintosh가 있습니다. 하지만 "Hackintosh"를 설치한 것은 아닙니다.*
+**부트로더** | OS를 로드하는 소프트웨어로, 일반적으로 OS 제작자가 만듭니다. OpenCore는 기술적으로 그 자체로 부트로더가 아닙니다(아래 부트 관리자 설명 참조). Apple의 Boot.efi는 Mac 또는 Hackintosh의 실제 부트 로더입니다.
+**부트 관리자** | 부트로더를 관리하는 소프트웨어입니다. Clover, systemd-boot, OpenCore, rEFInd, rEFIt... 등이 많이 있습니다. 일반적으로 이러한 소프트웨어는 실제 부트 로더를 위해 시스템을 준비하는 것으로 간주됩니다.
 ---
-Term | Description
+용어 | 설명
 --- | ---
-**OpenCore**   | The new hotness on the Hackintosh scene, made with security in mind by the [Acidanthera team](https://github.com/acidanthera), has faster booting and lighter weight than Clover. It is a lot more work to set up but also supports many things a lot more natively than Clover (like Hibernation, FileVault 2, Boot HotKeys...).
-**Clover**  | A boot manager now considered legacy with the release of OpenCore. This guide will not be covering uses of this software.
-**ACPI**  | The Advanced Configuration and Power Interface (ACPI) provides an open standard that operating systems can use to discover and configure computer hardware components, more of this will be discussed later in the guide.
-**DSDT/SSDT** | Tables in your ACPI that describe the devices and how the OS should interact with them e.g. putting the computer to sleep, wake, switching GPUs, USB ports.
-**.AML** | The compiled file format of ACPI, and what your PC will execute. `.DAT` is another extension with the exact same use.
-**.DSL** | The source code for ACPI – this is what you edit and compile for your computer. **DO NOT** mix this file format up with `.ASL`.
-**Kexts**   | Also known as **K**ernel **Ext**ensions, are macOS's drivers. They're used to perform different tasks like device drivers or for a different purpose (in Hackintoshing) like patching the OS, injecting information or running tasks. Kexts are not the only part of a good Hackintosh, as they're commonly paired with ACPI patches and fixes.
-**BIOS**  | The Basic Input/Output System is firmware used to perform hardware initialization during the booting process (power-on startup), and to provide runtime services for operating systems and programs. The BIOS firmware comes preinstalled on a personal computer's system board, and it is the first software to run when powered on (source: Wikipedia). It's a legacy piece of software that was made back in the 70s and is still used to this day due to its maturity.
-**UEFI**  | The Unified Extensible Firmware Interface (UEFI) is a specification that defines a software interface between an operating system and platform firmware. UEFI replaces the legacy Basic Input/Output System (BIOS) firmware interface originally present in all IBM PC-compatible personal computers, with most UEFI firmware implementations providing support for legacy BIOS services. UEFI can support remote diagnostics and repair of computers, even with no operating system installed. (source: Wikipedia)
-**UEFI Drivers** | Like any other OS, UEFI has drivers and they're loaded by Clover or OpenCore. They're also meant to load devices or perform other tasks, like loading Apple's HFS drives with HfsPlus.efi, patching macOS's `boot.efi` and so on. You may find them as `Clover Drivers` or `OpenCore Drivers`, they're all UEFI drivers. (Note: only use drivers that are meant for that specific boot manager. More info can be found on the [Clover Conversion page](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion)).
+**OpenCore** | [Acidanthera 팀](https://github.com/acidanthera)이 보안을 염두에 두고 만든 Hackintosh 분야의 새로운 인기 제품은 Clover보다 부팅이 빠르고 가볍습니다. 설정하는 데 많은 작업이 필요하지만 Clover보다 훨씬 더 많은 기능을 기본적으로 지원합니다(최대 절전 모드, FileVault 2, Boot HotKeys 등).
+**Clover** | OpenCore 출시로 레거시로 간주되는 부트 관리자입니다. 이 가이드에서는 이 소프트웨어의 사용에 대해 다루지 않습니다.
+**ACPI** | 고급 구성 및 전원 인터페이스(ACPI)는 운영 체제가 컴퓨터 하드웨어 구성 요소를 검색하고 구성하는 데 사용할 수 있는 개방형 표준을 제공하며, 이에 대한 자세한 내용은 가이드의 후반부에서 설명합니다.
+**DSDT/SSDT** | ACPI의 표로, 장치와 OS가 장치와 상호 작용하는 방식(예: 컴퓨터 절전 모드, 깨우기, GPU 전환, USB 포트)을 설명합니다.
+**.AML** | ACPI의 컴파일된 파일 형식과 PC에서 실행할 내용입니다. `.DAT`는 정확히 동일한 용도를 가진 또 다른 확장자입니다.
+**.DSL** | ACPI의 소스 코드 - 이것은 컴퓨터에서 편집하고 컴파일하는 것입니다. 이 파일 형식을 `.ASL`과 **혼동하지 마십시오**.
+**Kexts** | **K**ernel **Ext**ensions라고도 알려진 macOS의 드라이버입니다. 장치 드라이버와 같은 다양한 작업을 수행하거나 OS 패치, 정보 주입 또는 작업 실행과 같은 다른 목적(Hackintoshing에서)을 위해 사용됩니다. Kexts는 일반적으로 ACPI 패치 및 수정과 함께 사용되므로 좋은 Hackintosh의 유일한 부분은 아닙니다.
+**BIOS** | 기본 입출력 시스템은 부팅 프로세스(전원 켜기 시작) 중에 하드웨어 초기화를 수행하고 운영 체제 및 프로그램에 대한 런타임 서비스를 제공하는 데 사용되는 펌웨어입니다. BIOS 펌웨어는 개인용 컴퓨터의 시스템 보드에 사전 설치되어 제공되며 전원을 켰을 때 실행되는 첫 번째 소프트웨어입니다(출처: Wikipedia). 70년대에 만들어진 레거시 소프트웨어로, 성숙기에 접어들어 오늘날까지도 사용되고 있습니다.
+**UEFI** | UEFI(Unified Extensible Firmware Interface)는 운영 체제와 플랫폼 펌웨어 간의 소프트웨어 인터페이스를 정의하는 사양입니다. UEFI는 원래 모든 IBM PC 호환 개인용 컴퓨터에 존재했던 레거시 기본 입출력 시스템(BIOS) 펌웨어 인터페이스를 대체하며, 대부분의 UEFI 펌웨어 구현은 레거시 BIOS 서비스를 지원합니다. UEFI는 운영 체제가 설치되지 않아도 컴퓨터의 원격 진단 및 복구를 지원할 수 있습니다. (출처: 위키피디아)
+**UEFI 드라이버** | 다른 OS와 마찬가지로 UEFI에는 드라이버가 있으며 Clover 또는 OpenCore에서 로드합니다. 또한 Apple의 HFS 드라이브에 HfsPlus.efi를 로드하고 macOS의 `boot.efi`를 패치하는 등 장치를 로드하거나 다른 작업을 수행하기 위한 것입니다. `Clover 드라이버` 또는 `OpenCore 드라이버`로 찾을 수 있으며, 모두 UEFI 드라이버입니다. (참고: 해당 부트 관리자에 맞는 드라이버만 사용하세요. 자세한 내용은 [Clover 변환 페이지](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion)에서 확인할 수 있습니다.)
 ---
-Term | Description
+용어 | 설명
 --- | ---
-**EFI**   | It can denote two things: <br/>- Mac's firmware, which is the same as UEFI, but pretty modified for Macs only, so not so "Universal"<br/>- The partition on your hard drive that stores software read by the UEFI to load OSes (like the Windows bootloader) or UEFI Applications (like OpenCore), it's FAT32 formatted and has an ID type of `EF00` (in hex). It can be named ESP or SYSTEM, and it's usually from 100MB to 400MB in size but the size doesn't reflect upon anything.
-**MBR**   | Master Boot Record is a special type of boot sector at the very beginning of partitioned computer mass storage devices like fixed disks or removable drives intended for use with IBM PC-compatible systems and beyond. The MBR was first introduced in 1983 with PC DOS 2.0. The MBR holds the information on how the logical partitions, containing file systems, are organized on that medium. The MBR also contains executable code to function as a loader for the installed operating system—usually by passing control over to the loader's second stage, or in conjunction with each partition's volume boot record (VBR). This MBR code is usually referred to as a boot loader (source: Wikipedia). This format is used on BIOS/Legacy setups. The MBR format supports a maximum of 2 TiB of size and a max of 4 primary partitions.
-**GPT**   | GUID Partition Table (GPT) is a standard for the layout of partition tables of a physical computer storage device, such as a hard disk drive or solid-state drive, using universally unique identifiers, which are also known as globally unique identifiers (GUIDs). Forming a part of the Unified Extensible Firmware Interface (UEFI) standard (Unified EFI Forum-proposed replacement for the PC BIOS), it is nevertheless also used for some BIOS systems, because of the limitations of master boot record (MBR) partition tables, which use 32 bits for logical block addressing (LBA) of traditional 512-byte disk sectors (source: Wikipedia). Usually, this is the disk format you want to use on a UEFI system.
+**EFI** | 두 가지를 나타낼 수 있습니다. <br/>- Mac의 펌웨어로, UEFI와 동일하지만 Mac에만 맞게 꽤 수정되어 "범용"하지 않습니다.<br/>- UEFI가 OS(예: Windows 부트로더) 또는 UEFI 애플리케이션(예: OpenCore)을 로드하기 위해 읽는 소프트웨어를 저장하는 하드 드라이브의 파티션으로, FAT32입니다.
+포맷되고 ID 유형은 `EF00`(16진수)입니다. ESP 또는 SYSTEM으로 명명할 수 있으며, 일반적으로 크기는 100MB에서 400MB 사이이지만 크기는 어떤 것에도 반영되지 않습니다.
+**MBR** | 마스터 부트 레코드는 IBM PC 호환 시스템 이상에서 사용하도록 의도된 고정 디스크 또는 이동식 드라이브와 같은 분할된 컴퓨터 대용량 저장 장치의 맨 처음에 있는 특수 유형의 부트 섹터입니다. MBR은 1983년 PC DOS 2.0과 함께 처음 도입되었습니다. MBR은 파일 시스템을 포함하는 논리적 파티션이 해당 매체에서 어떻게 구성되는지에 대한 정보를 보관합니다. MBR에는 설치된 운영 체제의 로더 역할을 하는 실행 코드도 포함되어 있습니다. 일반적으로 로더의 두 번째 단계에 제어를 전달하거나 각 파티션의 볼륨 부트 레코드(VBR)와 함께 사용합니다. 이 MBR 코드는 일반적으로 부트 로더라고 합니다(출처: 위키피디아). 이 형식은 BIOS/레거시 설정에서 사용됩니다. MBR 형식은 최대 2TiB 크기와 최대 4개의 기본 파티션을 지원합니다.
+**GPT** | GUID 파티션 테이블(GPT)은 하드 디스크 드라이브나 솔리드 스테이트 드라이브와 같은 물리적 컴퓨터 저장 장치의 파티션 테이블 레이아웃에 대한 표준으로, 전역 고유 식별자(GUID)라고도 하는 범용 고유 식별자를 사용합니다. UEFI(Unified Extensible Firmware Interface) 표준(PC BIOS에 대한 Unified EFI 포럼 제안 대체)의 일부를 형성하지만, 기존 512바이트 디스크 섹터의 ​​논리 블록 주소 지정(LBA)에 32비트를 사용하는 마스터 부트 레코드(MBR) 파티션 테이블의 제한으로 인해 일부 BIOS 시스템에도 사용됩니다(출처: 위키피디아). 일반적으로 이는 UEFI 시스템에서 사용하려는 디스크 형식입니다.
 ---
-Term | Description
+용어 | 설명
 --- | ---
-**EC** | Embedded Controller. Communicates between the main board and embedded peripherals such as hotkeys, ports, or battery.
-**PLUG** | Allows for XCPM, Apple XNU (OS kernel) power management, to attach allowing for better overall CPU control. Only supported on Haswell and newer.
-**AWAC** | ACPI Wake Alarm Counter Clock, the board's internal clock. Contrast with the Real-Time Clock (RTC). macOS cannot communicate with AWAC clocks, so they must be patched.
-**PMC** | Power Management Controller, on B360, B365, H310, H370, Z390 motherboards OEMs forgot to map this region and so need SSDT-PMC to avoid page-faults
-**PNLF** | Internal backlight display, macOS uses this PNLF device to send and receive info for brightness control
-**XOSI/_OSI** | `_OSI` is used to determine what OS is being booted, renaming to XOSI allows us to trick hardware into thinking we're booting a different OS
-**HPET** | High Precision Event Timer, OSes use this to determine how to communicate with devices(IRQ). macOS can be very picky on how devices are set, so we need to sometimes patch the HPET.
-**RHUB** | Root USB Hub, where USB ports are defined. If certain definitions are missing here, USB ports may not work in macOS
-**IMEI** | Intel Management Engine Interface, handles misc tasks. In macOS, Apple relies on the IMEI for Intel GPU acceleration. If using an unknown ID like using a 7 series chipset with Sandy Bridge, macOS will be unable to find it for GPU acceleration.
-**UNC** | Uncore Bridge, similar to a North Bridge it handles many cache related functions. Many times OEMs will have this device defined but non-functional, macOS is unable to handle these situations.
-**SMBus** | System Management Bus, used to allow devices to easily communicate between each other.
+**EC** | 임베디드 컨트롤러. 메인 보드와 핫키, 포트 또는 배터리와 같은 임베디드 주변 장치 간에 통신합니다.
+**플러그** | XCPM, Apple XNU(OS 커널) 전원 관리를 허용하여 전반적인 CPU 제어를 개선합니다. Haswell 이상에서만 지원됩니다.
+**AWAC** | ACPI Wake Alarm Counter Clock, 보드의 내부 시계입니다. 실시간 시계(RTC)와 대조됩니다. macOS는 AWAC 시계와 통신할 수 없으므로 패치해야 합니다.
+**PMC** | B360, B365, H310, H370, Z390 마더보드의 전원 관리 컨트롤러 OEM은 이 영역을 매핑하는 것을 잊었기 때문에 페이지 오류를 방지하기 위해 SSDT-PMC가 필요합니다.
+**PNLF** | 내부 백라이트 디스플레이, macOS는 이 PNLF 장치를 사용하여 밝기 제어를 위한 정보를 송수신합니다.
+**XOSI/_OSI** | `_OSI`는 어떤 OS가 부팅되는지 확인하는 데 사용되며, XOSI로 이름을 바꾸면 하드웨어가 다른 OS를 부팅한다고 생각하도록 속일 수 있습니다.
+**HPET** | 고정밀 이벤트 타이머, OS는 이를 사용하여 장치(IRQ)와 통신하는 방법을 결정합니다. macOS는 장치가 설정되는 방식에 매우 까다로울 수 있으므로 때때로 HPET를 패치해야 합니다.
+**RHUB** | USB 포트가 정의된 루트 USB 허브. 여기에 특정 정의가 없으면 macOS에서 USB 포트가 작동하지 않을 수 있습니다.
+**IMEI** | Intel Management Engine Interface, 기타 작업을 처리합니다. macOS에서 Apple은 Intel GPU 가속을 위해 IMEI에 의존합니다. Sandy Bridge와 함께 7 시리즈 칩셋을 사용하는 것과 같이 알 수 없는 ID를 사용하는 경우 macOS는 GPU 가속을 위해 이를 찾을 수 없습니다.
+**UNC** | North Bridge와 유사한 Uncore Bridge는 많은 캐시 관련 기능을 처리합니다. 많은 경우 OEM은 이 장치를 정의하지만 작동하지 않으며 macOS는 이러한 상황을 처리할 수 없습니다.
+**SMBus** | 시스템 관리 버스, 장치가 서로 쉽게 통신할 수 있도록 하는 데 사용됩니다.
