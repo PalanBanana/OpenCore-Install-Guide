@@ -1,108 +1,102 @@
-# Why OpenCore over Clover and others
+# Clover 및 기타보다 OpenCore가 나은 이유
 
-This section contains a brief rundown as to why the community has been transitioning over to OpenCore, and aims to dispel a few common myths in the community. Those who just want a macOS machine can skip this page.
+이 섹션에는 커뮤니티가 OpenCore로 전환한 이유에 대한 간략한 설명이 포함되어 있으며, 커뮤니티에서 흔히 있는 몇 가지 오해를 해소하고자 합니다. macOS 머신만 원하는 사람은 이 페이지를 건너뛸 수 있습니다.
 
-[[toc]]
+[[목차]]
 
-## OpenCore features
+## OpenCore 기능
 
-* More OS Support!
-  * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 13, Ventura!
-* On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
-* Better overall stability as patches can be much more precise:
-  * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
-  * AMD OSX patches not needing to update with every minor security update
-* Better overall security in many forms:
-  * No need to disable System Integrity Protection (SIP)
-  * Built-in FileVault 2 support
-  * [Vaulting](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault) allowing to create EFI snapshots preventing unwanted modifications
-  * True secure-boot support
-    * Both UEFI and Apple's variant
-* BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk, just like a real Mac.
-* Supports boot hotkey via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.
+* 더 많은 OS 지원!
+* OpenCore는 이제 Clover와 Chameleon이 구현해야 했던 고통스러운 해킹 없이 더 많은 버전의 OS X와 ​​macOS를 기본적으로 지원합니다.
+* 여기에는 10.4, Tiger, 심지어 최신 빌드인 13, Ventura까지 포함됩니다!
+* 일반적으로 OpenCore 시스템은 불필요한 패치가 덜 적용되어 Clover를 사용하는 시스템보다 부팅 속도가 빠릅니다.
+* 패치가 훨씬 더 정확할 수 있으므로 전반적인 안정성이 향상됩니다.
+* [macOS 10.15.4 업데이트](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
+* AMD OSX 패치는 모든 사소한 보안 업데이트로 업데이트할 필요가 없습니다.
+* 여러 형태로 전반적인 보안이 향상됩니다.
+* 시스템 무결성 보호(SIP)를 비활성화할 필요가 없습니다.
+* 기본 제공 FileVault 2 지원
+* [Vaulting](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault)을 통해 원치 않는 수정을 방지하는 EFI 스냅샷을 만들 수 있습니다.
+* 진정한 보안 부팅 지원
+* UEFI와 Apple의 변형 모두
+* BootCamp 전환 및 부팅 장치 선택은 실제 Mac과 마찬가지로 시작 디스크에서 설정된 NVRAM 변수를 읽어 지원됩니다.
+* `boot.efi`를 통한 부팅 단축키 지원 - 부팅 장치를 선택하려면 시작 시 `Option` 또는 `ESC`를 누르고, 복구를 시작하려면 `Cmd+R`을 누르고, NVRAM을 재설정하려면 `Cmd+Opt+P+R`을 누릅니다.
 
-### Software Support
+### 소프트웨어 지원
 
-The biggest reason someone may want to switch from other boot loaders is actually software support:
+누군가가 다른 부트 로더에서 전환하고 싶어하는 가장 큰 이유는 실제로 소프트웨어 지원입니다.
 
-* Kexts no longer testing for Clover:
-  * Got a bug with a kext? Many developers including the organization [Acidanthera](https://github.com/acidanthera) (maker of most of your favorite kexts) won't provide support unless on OpenCore
-* Many firmware drivers being merged into OpenCore:
-  * [APFS Support](https://github.com/acidanthera/AppleSupportPkg)
-  * [FileVault support](https://github.com/acidanthera/AppleSupportPkg)
-  * [Firmware patches](https://github.com/acidanthera/AptioFixPkg)
+* Kext가 더 이상 Clover를 테스트하지 않음:
+* Kext에 버그가 있습니까? [Acidanthera](https://github.com/acidanthera) 조직(대부분의 인기 있는 kext 제작자)을 포함한 많은 개발자는 OpenCore가 아닌 이상 지원을 제공하지 않습니다.
+* OpenCore에 병합되는 많은 펌웨어 드라이버:
+* [APFS 지원](https://github.com/acidanthera/AppleSupportPkg)
+* [FileVault 지원](https://github.com/acidanthera/AppleSupportPkg)
+* [펌웨어 패치](https://github.com/acidanthera/AptioFixPkg)
 
-## OpenCore's shortcomings
+## OpenCore의 단점
 
-The majority of Clover's functionality is actually supported in OpenCore in the form of some quirk, however when transitioning you should pay close attention to OpenCore's missing features as this may or may not affect yourself:
+Clover의 기능 대부분은 실제로 OpenCore에서 약간의 엉뚱한 형태로 지원되지만 전환할 때는 OpenCore의 누락된 기능에 주의를 기울여야 합니다. 이는 사용자에게 영향을 미칠 수도 있고 미치지 않을 수도 있습니다.
 
-* Does not support booting MBR-based operating systems
-  * Work around is to chain-load rEFInd once in OpenCore
-* Does not support UEFI-based VBIOS patching
-  * This can be done in macOS however
-* Does not support automatic DeviceProperty injection for legacy GPUs
-  * ie. InjectIntel, InjectNVIDIA and InjectAti
-  * This can be done manually however: [GPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
-* Does not support IRQ conflict patching
-  * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
-* Does not support P and C state generation for older CPUs
-* Does not support Hardware UUID Injection
-* Does not support many of Clover's XCPM patches
-  * ie. Ivy Bridge XCPM patches
-* Does not support hiding specific drives
-* Does not support changing settings within OpenCore's menu
-* Does not patch PCIRoot UID value
-* Does not support macOS-only ACPI patching
+* MBR 기반 운영 체제 부팅을 지원하지 않습니다.
+* 해결 방법은 OpenCore에서 rEFInd를 한 번 체인 로드하는 것입니다.
+* UEFI 기반 VBIOS 패치를 지원하지 않습니다. * macOS에서는 가능하지만
+* 레거시 GPU에 대한 자동 DeviceProperty 주입을 지원하지 않습니다. * 예: InjectIntel, InjectNVIDIA 및 InjectAti
+* 그러나 수동으로는 가능합니다. [GPU 패치](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* IRQ 충돌 패치를 지원하지 않습니다. * [SSDTTime](https://github.com/corpnewt/SSDTTime)으로 해결할 수 있습니다.
+* 이전 CPU에 대한 P 및 C 상태 생성을 지원하지 않습니다. * 하드웨어 UUID 주입을 지원하지 않습니다. * Clover의 많은 XCPM 패치를 지원하지 않습니다. * 예: Ivy Bridge XCPM 패치
+* 특정 드라이브 숨기기를 지원하지 않음
+* OpenCore 메뉴 내에서 설정을 변경하는 것을 지원하지 않음
+* PCIRoot UID 값을 패치하지 않음
+* macOS 전용 ACPI 패치를 지원하지 않음
 
-## Common Myths
+## 일반적인 오해
 
-### Is OpenCore unstable as it's a beta?
+### OpenCore는 베타 버전이므로 불안정합니까?
 
-Short Answer: No
+짧은 답변: 아니요
 
-Long Answer: No
+긴 답변: 아니요
 
-OpenCore's version number does not represent the quality of the project. Instead, it's more of a way to see the stepping stones of the project. Acidanthera still has much they'd like to do with the project including overall refinement and more feature support.
+OpenCore의 버전 번호는 프로젝트의 품질을 나타내는 것이 아닙니다. 대신 프로젝트의 발판을 보여주는 방법입니다. Acidanthera는 여전히 전반적인 개선 및 더 많은 기능 지원을 포함하여 프로젝트와 관련하여 하고 싶은 일이 많습니다.
 
-For example, OpenCore goes through proper security audits to ensure it complies with UEFI Secure Boot, and is the only Hackintosh bootloader to undergo these rigorous reviews and have such support.
+예를 들어, OpenCore는 UEFI 보안 부팅을 준수하는지 확인하기 위해 적절한 보안 감사를 거치며 이러한 엄격한 검토를 거쳐 이러한 지원을 받는 유일한 Hackintosh 부트로더입니다.
 
-Version 0.6.1 was originally designed to be the official release of OpenCore as it would have proper UEFI/Apple Secure Boot, and would be the 1 year anniversary of OpenCore's release as a public tool. However, due to circumstances around macOS Big Sur and the rewriting of OpenCore's prelinker to support it, it was decided to push off 1.0.0 for another year.
+버전 0.6.1은 원래 OpenCore의 공식 릴리스로 설계되었는데, 적절한 UEFI/Apple 보안 부팅이 있었고, OpenCore가 공개 도구로 출시된 지 1주년이 되었습니다. 그러나 macOS Big Sur와 이를 지원하기 위한 OpenCore의 사전 링커 재작성 주변의 상황으로 인해 1.0.0을 1년 더 미루기로 결정했습니다.
 
-Current road map:
+현재 로드맵:
 
-* 2019: Year of Beta
-* 2020: Year of Secure Boot
-* 2021: Year of Refinement
+* 2019: 베타의 해
+* 2020: 보안 부팅의 해
+* 2021: 개선의 해
 
-So please do not see the version number as a hindrance, instead as something to look forward to.
+따라서 버전 번호를 방해물로 보지 말고, 기대해야 할 것으로 생각하세요.
 
-### Does OpenCore always inject SMBIOS and ACPI data into other OSes?
+### OpenCore는 항상 SMBIOS 및 ACPI 데이터를 다른 OS에 주입합니까?
 
-By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking consists of three parts:
+기본적으로 OpenCore는 모든 OS가 ACPI 및 SMBIOS 정보와 관련하여 동등하게 처리되어야 한다고 가정합니다. 이러한 생각의 이유는 세 가지 부분으로 구성됩니다.
 
-* This allows for proper multiboot support, like with [BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
-* Avoids poorly made DSDTs and encourages proper ACPI practices
-* Avoids edge cases where info is injected several times, commonly seen with Clover
-  * i.e. How would you handle SMBIOS and ACPI data injection once you booted boot.efi, but then get kicked out? The changes are already in memory and so trying to undo them can be quite dangerous. This is why Clover's method is frowned upon.
+* 이렇게 하면 [BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)와 같이 적절한 멀티부팅 지원이 가능합니다.
+* 제대로 만들어지지 않은 DSDT를 피하고 적절한 ACPI 관행을 장려합니다.
+* Clover에서 흔히 볼 수 있는 정보가 여러 번 주입되는 에지 케이스를 피합니다.
+* 즉, boot.efi를 부팅한 후 SMBIOS 및 ACPI 데이터 주입을 어떻게 처리해야 할까요? 그런 다음 쫓겨납니다. 변경 사항은 이미 메모리에 있으므로 실행 취소를 시도하는 것은 매우 위험할 수 있습니다. 이것이 Clover의 방법이 비난받는 이유입니다.
 
-However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS-limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
+* 그러나 OpenCore에는 macOS가 SMBIOS 정보를 읽는 곳을 패치하여 SMBIOS 주입을 macOS로 제한할 수 있는 특이한 점이 있습니다. `CustomSMBIOSMode`를 `Custom`으로 설정한 `CustomSMIOSGuid` 특이한 점은 나중에 깨질 수 있으므로 특정 소프트웨어가 다른 OS에서 깨지는 경우에만 이 옵션을 권장합니다. 최상의 안정성을 위해 이러한 특이한 점을 비활성화하세요.
 
-### Does OpenCore require a fresh install?
+### OpenCore에 새로 설치가 필요합니까?
 
-Not at all in the event you have a "Vanilla" installation – what this refers to is whether the OS has tampered in any way, such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered with, either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues.
+"Vanilla" 설치인 경우에는 전혀 필요하지 않습니다. 이는 OS가 시스템 볼륨에 타사 kext를 설치하거나 Apple에서 지원하지 않는 기타 수정 사항과 같이 어떤 식으로든 조작했는지 여부를 나타냅니다. 시스템이 Hackintool과 같은 타사 유틸리티나 사용자에 의해 심하게 손상되었을 경우 잠재적인 문제를 피하기 위해 새로 설치하는 것이 좋습니다.
 
-Special note for Clover users: please reset your NVRAM when installing with OpenCore. Many of Clover variables can conflict with OpenCore and macOS.
+Clover 사용자를 위한 특별 참고 사항: OpenCore로 설치할 때 NVRAM을 재설정하세요. Clover 변수 중 다수가 OpenCore 및 macOS와 충돌할 수 있습니다.
 
-* Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
+* 참고: Thinkpad 노트북은 OpenCore에서 NVRAM을 재설정한 후 반쯤 벽돌이 되는 것으로 알려져 있으므로 이러한 컴퓨터에서 BIOS를 업데이트하여 NVRAM을 재설정하는 것이 좋습니다.
 
-### Does OpenCore only support limited versions of macOS?
+### OpenCore는 제한된 버전의 macOS만 지원합니까?
 
-As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all the way back to OS X 10.4! Proper support however will depend on your hardware, so please verify yourself: [Hardware Limitations](macos-limits.md)
+OpenCore 0.6.2부터는 OS X 10.4까지 거슬러 올라가는 모든 Intel 버전의 macOS를 부팅할 수 있습니다! 하지만 적절한 지원은 하드웨어에 따라 달라지므로 직접 확인하세요. [하드웨어 제한](macos-limits.md)
 
-::: details macOS Install Gallery
+::: 세부 정보 macOS 설치 갤러리
 
-Acidanthera has tested many versions, and I myself have run many versions of OS X on my old HP DC 7900 (Core2 Quad Q8300). Here's just a small gallery of what I've tested:
+Acidanthera는 여러 버전을 테스트했고, 저도 오래된 HP DC 7900(Core2 Quad Q8300)에서 여러 버전의 OS X를 실행했습니다. 다음은 제가 테스트한 것의 작은 갤러리입니다. 테스트됨:
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.4-Tiger.png)
 
@@ -114,13 +108,13 @@ Acidanthera has tested many versions, and I myself have run many versions of OS 
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.8-MountainLion.png)
 
-![](./images/installer-guide/legacy-mac-install-md/dumpster/10.9-Mavericks.png)
+![](./images/installer-guide/legacy-mac- install-md/dumpster/10.9-Mavericks.png)
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.10-Yosemite.png)
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.12-Sierra.png)
 
-![](./images/installer-guide/legacy-mac-install-md/dumpster/10.13-HighSierra.png)
+![](./images/installer-g uide/legacy-mac-install-md/dumpster/10.13-HighSierra.png)
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.15-Catalina.png)
 
@@ -128,32 +122,32 @@ Acidanthera has tested many versions, and I myself have run many versions of OS 
 
 :::
 
-### Does OpenCore support older hardware?
+### OpenCore는 이전 하드웨어를 지원합니까?
 
-As of right now, the majority of Intel hardware is supported so long as the OS itself does! However please refer to the [Hardware Limitations page](macos-limits.md) for more info on what hardware is supported in what versions of OS X/macOS.
+현재로서는 OS 자체만 지원된다면 대부분의 Intel 하드웨어가 지원됩니다! 그러나 어떤 하드웨어가 어떤 버전의 OS X/macOS에서 지원되는지에 대한 자세한 내용은 [하드웨어 제한 사항 페이지](macos-limits.md)를 참조하세요.
 
-Currently, Intel's Yonah and newer series CPUs have been tested properly with OpenCore.
+현재 Intel의 Yonah 및 최신 시리즈 CPU는 OpenCore에서 제대로 테스트되었습니다.
 
-### Does OpenCore support Windows/Linux booting?
+### OpenCore는 Windows/Linux 부팅을 지원합니까?
 
-OpenCore will automatically detect Windows without any additional configuration. With OpenCore 0.7.3, OpenLinuxBoot was added to OpenCore as an EFI driver, which will automatically detect Linux partitions. This requires either [ext4_x64.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/ext4_x64.efi) or [btrfs_x64.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/btrfs_x64.efi) depending on which format it used in your distro. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
+OpenCore는 추가 구성 없이 Windows를 자동으로 감지합니다. OpenCore 0.7.3에서는 OpenLinuxBoot가 EFI 드라이버로 OpenCore에 추가되어 Linux 파티션을 자동으로 감지합니다. 이를 위해서는 배포판에서 사용한 형식에 따라 [ext4_x64.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/ext4_x64.efi) 또는 [btrfs_x64.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/btrfs_x64.efi)가 필요합니다. 부트로더의 경로나 이름이 불규칙한 모든 OS의 경우 BlessOverride 섹션에 추가하기만 하면 됩니다.
 
-### Legality of Hackintoshing
+### 해킨토싱의 합법성
 
-Where hackintoshing sits is in a legal grey area, mainly that while this is not illegal we are in fact breaking the EULA. The reason this is not illegal:
+해킨토싱은 법적으로 불분명한 영역에 있습니다. 주로 불법은 아니지만 실제로 EULA를 위반하고 있기 때문입니다. 이것이 불법이 아닌 이유:
 
-* We are downloading macOS from [Apple's servers directly](https://github.com/acidanthera/OpenCorePkg/blob/0.6.9/Utilities/macrecovery/macrecovery.py#L125)
-* We are doing this as a non-profit organization for teaching and personal use
-  * People who plan to use their Hackintosh for work or want to resell them should refer to the [Psystar case](https://en.wikipedia.org/wiki/Psystar_Corporation) and their regional laws
+* 우리는 [Apple의 서버](https://github.com/acidanthera/OpenCorePkg/blob/0.6.9/Utilities/macrecovery/macrecovery.py#L125)에서 macOS를 직접 다운로드하고 있습니다.
+* 우리는 비영리 단체로서 교육 및 개인적 사용을 위해 이를 수행하고 있습니다.
+* Hackintosh를 업무에 사용하거나 재판매하려는 사람은 [Psystar 사례](https://en.wikipedia.org/wiki/Psystar_Corporation)와 해당 지역 법률을 참조해야 합니다.
 
-While the EULA states that macOS should only be installed on real Macs or virtual machines running on genuine Macs ([sections 2B-i and 2B-iii](https://www.apple.com/legal/sla/docs/macOSBigSur.pdf)), there is no enforceable law that outright bans this. However, sites that repackage and modify macOS installers do potentially risk the issue of [DMCA takedowns](https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act) and such.
+EULA는 macOS를 정품 Mac 또는 정품 Mac에서 실행되는 가상 머신에만 설치해야 한다고 명시하지만([섹션 2B-i 및 2B-iii](https://www.apple.com/legal/sla/docs/macOSBigSur.pdf)), 이를 전면적으로 금지하는 시행 가능한 법률은 없습니다. 그러나 macOS 설치 프로그램을 다시 패키징하고 수정하는 사이트는 잠재적으로 [DMCA 삭제](https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act)와 같은 문제를 일으킬 위험이 있습니다.
 
-* **Note**: This is not legal advice, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
+* **참고**: 이는 법적 조언이 아니므로 직접 적절한 평가를 내리고 우려 사항이 있는 경우 변호사와 상의하십시오.
 
-### Does macOS support NVIDIA GPUs?
+### macOS는 NVIDIA GPU를 지원합니까?\
 
-Due to issues revolving around NVIDIA support in newer versions of macOS, many users come to the conclusion that macOS never supported NVIDIA GPUs. Apple supported Macs with NVIDIA GPUs (such as the 2013 MacBook Pro with a Kepler dGPU) until the release of Monterey Beta 7. While there are community-made patches to bring back support, they require SIP (System Integrity Protection) to be disabled, disabling important security features in macOS.
+최신 버전의 macOS에서 NVIDIA 지원과 관련된 문제로 인해 많은 사용자가 macOS가 NVIDIA GPU를 지원하지 않았다는 결론을 내렸습니다. Apple은 Monterey Beta 7이 출시될 때까지 NVIDIA GPU가 있는 Mac(예: Kepler dGPU가 있는 2013년 MacBook Pro)을 지원했습니다. 지원을 다시 제공하기 위한 커뮤니티에서 만든 패치가 있지만 SIP(시스템 무결성 보호)를 비활성화해야 하며 macOS의 중요한 보안 기능이 비활성화됩니다.
 
-The other issue has to do with any newer NVIDIA GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on NVIDIA for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus NVIDIA couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
+다른 문제는 최신 NVIDIA GPU와 관련이 있는데, Apple이 해당 GPU가 있는 컴퓨터를 더 이상 제공하지 않아 Apple에서 공식적인 OS 지원을 받지 못했기 때문입니다. 대신 사용자는 타사 드라이버에 대해 NVIDIA에 의존해야 했습니다. Apple의 새로 도입된 보안 부팅 문제로 인해 더 이상 웹 드라이버를 지원할 수 없었고 NVIDIA는 최신 플랫폼에 이를 게시할 수 없어 Mac OS 10.13, High Sierra로 제한되었습니다.
 
-For more info on OS support, see here: [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
+OS 지원에 대한 자세한 내용은 여기를 참조하세요: [GPU 구매자 가이드](https://dortania.github.io/GPU-Buyers-Guide/)
